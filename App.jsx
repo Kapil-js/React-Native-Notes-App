@@ -50,7 +50,24 @@ export default function App() {
             component={HomeScreen}
             options={{headerShown: false}}
           />
-          <Stack.Screen name="AddNote" component={AddNoteScreen} />
+          <Stack.Screen
+            name="AddNote"
+            component={AddNoteScreen}
+            options={{
+              headerTitle: 'Add Notes',
+              headerTitleAlign: 'center',
+              headerBackTitleVisible: false,
+              headerShadowVisible: false,
+              headerTintColor: '#2A2251',
+              headerTitleStyle: {
+                fontSize: 18,
+                fontFamily: FONT.NunitoSemiBold,
+              },
+              headerStyle: {
+                backgroundColor: '#F9F8FD',
+              },
+            }}
+          />
           <Stack.Screen
             name="Login"
             component={LoginScreen}

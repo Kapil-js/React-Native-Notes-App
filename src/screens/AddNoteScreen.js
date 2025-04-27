@@ -6,12 +6,14 @@ import {
   TouchableOpacity,
   StyleSheet,
   Alert,
+  StatusBar,
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {notesCollection} from '../firebase/firebaseConfig';
 import auth from '@react-native-firebase/auth';
 import moment from 'moment';
 import firestore from '@react-native-firebase/firestore';
+import FONT from './font';
 
 const AddNoteScreen = () => {
   const navigation = useNavigation();
@@ -55,26 +57,38 @@ const AddNoteScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
-      <TextInput
-        placeholder="Write your note here..."
-        multiline
-        value={text}
-        onChangeText={setText}
-        style={styles.textInput}
+    <>
+      <StatusBar
+        backgroundColor="#000"
+        barStyle="light-content"
+        translucent={false}
       />
+      <View style={styles.container}>
+        <TextInput
+          placeholder="Write your note here..."
+          multiline
+          value={text}
+          onChangeText={setText}
+          style={styles.textInput}
+        />
 
-      <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
-        <Text style={styles.saveText}>
-          {editingNote ? 'Update Note' : 'Save Note'}
-        </Text>
-      </TouchableOpacity>
-    </View>
+        <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
+          <Text style={styles.saveText}>
+            {editingNote ? 'Update Note' : 'Save Note'}
+          </Text>
+        </TouchableOpacity>
+      </View>
+    </>
   );
 };
 
 const styles = StyleSheet.create({
-  container: {flex: 1, padding: 16, paddingTop: 80},
+  container: {
+    flex: 1,
+    padding: 16,
+    paddingTop: 30,
+    backgroundColor: '#F9F8FD',
+  },
   textInput: {
     borderWidth: 1,
     borderColor: '#ccc',
@@ -83,6 +97,7 @@ const styles = StyleSheet.create({
     padding: 16,
     textAlignVertical: 'top',
     fontSize: 16,
+    fontFamily: FONT.NunitoSemiBold,
   },
   saveButton: {
     backgroundColor: '#7B5AED',
@@ -94,7 +109,7 @@ const styles = StyleSheet.create({
   saveText: {
     color: '#fff',
     fontSize: 16,
-    fontWeight: 'bold',
+    fontFamily: FONT.NunitoBold,
   },
 });
 

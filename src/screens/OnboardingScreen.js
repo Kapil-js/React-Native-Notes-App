@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
+import {View, Text, Image, StyleSheet, TouchableOpacity, StatusBar} from 'react-native';
 import Onboarding from 'react-native-onboarding-swiper';
 import auth from '@react-native-firebase/auth';
 import FONT from './font';
@@ -57,81 +57,94 @@ const OnboardingScreen = ({navigation}) => {
   );
 
   return (
-    <Onboarding
-      onDone={() => navigation.replace('Login')}
-      //   onSkip={() => navigation.replace('Home')}
-      DotComponent={Dots}
-      bottomBarHighlight={false}
-      transitionAnimationDuration={900}
-      pages={[
-        {
-          backgroundColor: '#F9F8FD',
-          image: (
-            <Image
-              source={require('../assets/images/onboard1.png')}
-              style={styles.image}
-            />
-          ),
-          title: (
-            <Text style={styles.title}>
-              <Text style={styles.titleBold}>Note-</Text>
-              <Text style={styles.titleColor}>Taking App</Text>
-            </Text>
-          ),
-          subtitle: (
-            <View>
-              <Text style={styles.subtitle}>Save and share notes</Text>
-              <CreateAccountButton onPress={() => navigation.replace('Home')} />
-              <LoginText />
-            </View>
-          ),
-        },
-        {
-          backgroundColor: '#F9F8FD',
-          image: (
-            <Image
-              source={require('../assets/images/onboard1.png')}
-              style={styles.image}
-            />
-          ),
-          title: (
-            <Text style={styles.title}>
-              <Text style={styles.titleBold}>Note-</Text>
-              <Text style={styles.titleColor}>Taking App</Text>
-            </Text>
-          ),
-          subtitle: (
-            <View>
-              <Text style={styles.subtitle}>Save and share notes</Text>
-              <CreateAccountButton onPress={() => navigation.replace('Home')} />
-              <LoginText />
-            </View>
-          ),
-        },
-        {
-          backgroundColor: '#F9F8FD',
-          image: (
-            <Image
-              source={require('../assets/images/onboard1.png')}
-              style={styles.image}
-            />
-          ),
-          title: (
-            <Text style={styles.title}>
-              <Text style={styles.titleBold}>Note-</Text>
-              <Text style={styles.titleColor}>Taking App</Text>
-            </Text>
-          ),
-          subtitle: (
-            <View>
-              <Text style={styles.subtitle}>Save and share notes</Text>
-              <CreateAccountButton onPress={() => navigation.replace('Home')} />
-              <LoginText />
-            </View>
-          ),
-        },
-      ]}
-    />
+    <>
+      <StatusBar
+        backgroundColor="#000"
+        barStyle="light-content"
+        translucent={false}
+      />
+      <Onboarding
+        onDone={() => navigation.replace('Login')}
+        //   onSkip={() => navigation.replace('Home')}
+        DotComponent={Dots}
+        bottomBarHighlight={false}
+        transitionAnimationDuration={900}
+        pages={[
+          {
+            backgroundColor: '#F9F8FD',
+            image: (
+              <Image
+                source={require('../assets/images/onboard1.png')}
+                style={styles.image}
+              />
+            ),
+            title: (
+              <Text style={styles.title}>
+                <Text style={styles.titleBold}>Note-</Text>
+                <Text style={styles.titleColor}>Taking App</Text>
+              </Text>
+            ),
+            subtitle: (
+              <View>
+                <Text style={styles.subtitle}>Save and share notes</Text>
+                <CreateAccountButton
+                  onPress={() => navigation.replace('Home')}
+                />
+                <LoginText />
+              </View>
+            ),
+          },
+          {
+            backgroundColor: '#F9F8FD',
+            image: (
+              <Image
+                source={require('../assets/images/onboard1.png')}
+                style={styles.image}
+              />
+            ),
+            title: (
+              <Text style={styles.title}>
+                <Text style={styles.titleBold}>Note-</Text>
+                <Text style={styles.titleColor}>Taking App</Text>
+              </Text>
+            ),
+            subtitle: (
+              <View>
+                <Text style={styles.subtitle}>Save and share notes</Text>
+                <CreateAccountButton
+                  onPress={() => navigation.replace('Home')}
+                />
+                <LoginText />
+              </View>
+            ),
+          },
+          {
+            backgroundColor: '#F9F8FD',
+            image: (
+              <Image
+                source={require('../assets/images/onboard1.png')}
+                style={styles.image}
+              />
+            ),
+            title: (
+              <Text style={styles.title}>
+                <Text style={styles.titleBold}>Note-</Text>
+                <Text style={styles.titleColor}>Taking App</Text>
+              </Text>
+            ),
+            subtitle: (
+              <View>
+                <Text style={styles.subtitle}>Save and share notes</Text>
+                <CreateAccountButton
+                  onPress={() => navigation.replace('Home')}
+                />
+                <LoginText />
+              </View>
+            ),
+          },
+        ]}
+      />
+    </>
   );
 };
 const styles = StyleSheet.create({

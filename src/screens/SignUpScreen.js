@@ -11,6 +11,7 @@ import {
   ToastAndroid,
   Platform,
   Alert as RNAlert,
+  StatusBar,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
@@ -60,89 +61,96 @@ export default function SignUpScreen() {
       });
   };
   return (
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
-      <TextInput
-        style={styles.input}
-        placeholder="User name"
-        placeholderTextColor="#72777A"
-        value={username}
-        onChangeText={setUsername}
+    <>
+      <StatusBar
+        backgroundColor="#000"
+        barStyle="light-content"
+        translucent={false}
       />
-
-      <TextInput
-        style={styles.input}
-        placeholder="Email"
-        placeholderTextColor="#72777A"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-
-      <View style={styles.passwordContainer}>
+      <KeyboardAvoidingView style={styles.container} behavior="padding">
         <TextInput
-          style={styles.passwordInput}
-          placeholder="Password"
+          style={styles.input}
+          placeholder="User name"
           placeholderTextColor="#72777A"
-          secureTextEntry={!showPass}
-          value={password}
-          onChangeText={setPassword}
+          value={username}
+          onChangeText={setUsername}
         />
-        <TouchableOpacity onPress={() => setShowPass(!showPass)}>
-          <Image
-            source={
-              showPass
-                ? require('../assets/images/eye-on-icon.png')
-                : require('../assets/images/eye-off-icon.png')
-            }
-            style={{width: 22, height: 22}}
-          />
-        </TouchableOpacity>
-      </View>
 
-      <View style={styles.passwordContainer}>
         <TextInput
-          style={styles.passwordInput}
-          placeholder="Confirm Password"
+          style={styles.input}
+          placeholder="Email"
           placeholderTextColor="#72777A"
-          secureTextEntry={!showConfirm}
-          value={confirm}
-          onChangeText={setConfirm}
+          value={email}
+          onChangeText={setEmail}
+          keyboardType="email-address"
+          autoCapitalize="none"
         />
-        <TouchableOpacity onPress={() => setShowConfirm(!showConfirm)}>
-          <Image
-            source={
-              showConfirm
-                ? require('../assets/images/eye-on-icon.png')
-                : require('../assets/images/eye-off-icon.png')
-            }
-            style={{width: 22, height: 22}}
+
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder="Password"
+            placeholderTextColor="#72777A"
+            secureTextEntry={!showPass}
+            value={password}
+            onChangeText={setPassword}
           />
+          <TouchableOpacity onPress={() => setShowPass(!showPass)}>
+            <Image
+              source={
+                showPass
+                  ? require('../assets/images/eye-on-icon.png')
+                  : require('../assets/images/eye-off-icon.png')
+              }
+              style={{width: 22, height: 22}}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.passwordContainer}>
+          <TextInput
+            style={styles.passwordInput}
+            placeholder="Confirm Password"
+            placeholderTextColor="#72777A"
+            secureTextEntry={!showConfirm}
+            value={confirm}
+            onChangeText={setConfirm}
+          />
+          <TouchableOpacity onPress={() => setShowConfirm(!showConfirm)}>
+            <Image
+              source={
+                showConfirm
+                  ? require('../assets/images/eye-on-icon.png')
+                  : require('../assets/images/eye-off-icon.png')
+              }
+              style={{width: 22, height: 22}}
+            />
+          </TouchableOpacity>
+        </View>
+
+        <TouchableOpacity style={styles.button} onPress={signUp}>
+          <Text style={styles.buttonText}>Sign Up</Text>
         </TouchableOpacity>
-      </View>
 
-      <TouchableOpacity style={styles.button} onPress={signUp}>
-        <Text style={styles.buttonText}>Sign Up</Text>
-      </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Login')}>
+          <Text
+            style={{
+              textAlign: 'center',
+              color: '#7B61FF',
+              fontFamily: FONT.NunitoMedium,
+              marginBottom: 30,
+            }}>
+            Already have an account? Log in
+          </Text>
+        </TouchableOpacity>
 
-      <TouchableOpacity onPress={() => navigation.navigate('Login')}>
-        <Text
-          style={{
-            textAlign: 'center',
-            color: '#7B61FF',
-            fontFamily: FONT.NunitoMedium,
-            marginBottom: 30,
-          }}>
-          Already have an account? Log in
+        <Text style={styles.terms}>
+          By continuing, you agree to our{' '}
+          <Text style={styles.link}>Terms of Service</Text> and{' '}
+          <Text style={styles.link}>Privacy Policy</Text>.
         </Text>
-      </TouchableOpacity>
-
-      <Text style={styles.terms}>
-        By continuing, you agree to our{' '}
-        <Text style={styles.link}>Terms of Service</Text> and{' '}
-        <Text style={styles.link}>Privacy Policy</Text>.
-      </Text>
-    </KeyboardAvoidingView>
+      </KeyboardAvoidingView>
+    </>
   );
 }
 
@@ -179,7 +187,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     borderRadius: 12,
     paddingHorizontal: 16,
-    paddingVertical: 10,
+    paddingVertical: 6,
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',

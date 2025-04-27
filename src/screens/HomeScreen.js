@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  StatusBar,
 } from 'react-native';
 import auth from '@react-native-firebase/auth';
 import {useNavigation} from '@react-navigation/native';
@@ -94,77 +95,84 @@ const HomeScreen = () => {
     </View>
   );
   return (
-    <SafeAreaView style={styles.container}>
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'flex-end',
-          alignItems: 'end',
-          marginTop: 20,
-        }}>
-        <TouchableOpacity
-          onPress={handleLogout}
+    <>
+      <StatusBar
+        backgroundColor="#000"
+        barStyle="light-content"
+        translucent={false}
+      />
+      <SafeAreaView style={styles.container}>
+        <View
           style={{
             flexDirection: 'row',
-            alignItems: 'center',
-            justifyContent: 'center',
+            justifyContent: 'flex-end',
+            alignItems: 'end',
+            marginTop: 20,
           }}>
-          <Image
-            source={require('../assets/images/logout.png')}
-            style={{width: 24, height: 20, marginRight: 10}}
-          />
+          <TouchableOpacity
+            onPress={handleLogout}
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <Image
+              source={require('../assets/images/logout.png')}
+              style={{width: 24, height: 20, marginRight: 10}}
+            />
+            <Text
+              style={{
+                fontSize: 16,
+                fontFamily: FONT.NunitoBold,
+                color: '#000',
+              }}>
+              Logout
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <View style={{marginTop: 40, alignItems: 'center', paddingBottom: 20}}>
           <Text
             style={{
               fontSize: 16,
-              fontFamily: FONT.NunitoBold,
-              color: '#000',
+              fontFamily: 'Nunito-Bold',
+              fontWeight: 'bol',
+              marginBottom: 4,
+              color: '#938AC2',
             }}>
-            Logout
+            Welcome, {!username ? auth().currentUser?.email : username}!
           </Text>
-        </TouchableOpacity>
-      </View>
-      <View style={{marginTop: 40, alignItems: 'center', paddingBottom: 20}}>
-        <Text
-          style={{
-            fontSize: 16,
-            fontFamily: 'Nunito-Bold',
-            fontWeight: 'bol',
-            marginBottom: 4,
-            color: '#938AC2',
-          }}>
-          Welcome, {!username ? auth().currentUser?.email : username}!
-        </Text>
-        <Text
-          style={{
-            fontSize: 22,
-            color: '#292150',
-            // fontWeight: 'bold',
-            fontFamily: 'Nunito-ExtraBold',
-          }}>
-          Note-Taking App
-        </Text>
-      </View>
-      <View style={{flex: 1, width: '100%'}}>
-        <FlatList
-          data={notes}
-          renderItem={renderItem}
-          keyExtractor={item => item.id}
-          contentContainerStyle={styles.notesList}
-        />
-      </View>
-
-      <View style={styles.footer}>
-        <TouchableOpacity
-          style={styles.addButton}
-          onPress={() => navigation.navigate('AddNote')}>
-          <Image
-            source={require('../assets/images/add.png')}
-            style={{width: 24, height: 24}}
+          <Text
+            style={{
+              fontSize: 22,
+              color: '#292150',
+              // fontWeight: 'bold',
+              fontFamily: 'Nunito-ExtraBold',
+            }}>
+            Note-Taking App
+          </Text>
+        </View>
+        <View style={{flex: 1, width: '100%'}}>
+          <FlatList
+            data={notes}
+            renderItem={renderItem}
+            keyExtractor={item => item.id}
+            contentContainerStyle={styles.notesList}
           />
-          <Text style={styles.addText}>Add New Notes</Text>
-        </TouchableOpacity>
-      </View>
-    </SafeAreaView>
+        </View>
+
+        <View style={styles.footer}>
+          <TouchableOpacity
+            style={styles.addButton}
+            onPress={() => navigation.navigate('AddNote')}>
+            <Image
+              source={require('../assets/images/add.png')}
+              style={{width: 24, height: 24}}
+            />
+            <Text style={styles.addText}>Add New Notes</Text>
+          </TouchableOpacity>
+        </View>
+      </SafeAreaView>
+    </>
   );
 };
 
@@ -198,13 +206,15 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 14,
     marginBottom: 8,
+    fontFamily: FONT.NunitoMedium,
   },
   noteTime: {
     color: '#eee',
     fontSize: 14,
     position: 'absolute',
     left: 16,
-    bottom: 16,
+    bottom: 10,
+    fontFamily: FONT.NunitoMedium,
   },
   actions: {
     flexDirection: 'row',
@@ -218,6 +228,9 @@ const styles = StyleSheet.create({
     width: 40,
     height: 40,
     elevation: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   footer: {
     position: 'absolute',
@@ -233,11 +246,13 @@ const styles = StyleSheet.create({
     borderRadius: 30,
     alignItems: 'center',
     elevation: 4,
+    fontFamily: FONT.NunitoMedium,
   },
   addText: {
     color: '#fff',
     fontWeight: 'bold',
     fontSize: 16,
     marginLeft: 8,
+    fontFamily: FONT.NunitoSemiBold,
   },
 });
